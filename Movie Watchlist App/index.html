@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#10110f" />
+    <meta name="description" content="A little home for all the movies you mean to watch." />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Reelgood" />
+    <title>Reelgood — Your movie watchlist</title>
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="icon" href="app-icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Main navigation">
+        <a class="brand" href="#" aria-label="Reelgood home">
+          <span class="brand-mark" aria-hidden="true">r</span>
+          <span>reelgood<span class="brand-period">.</span></span>
+        </a>
+
+        <div class="sidebar-label">YOUR SPACE</div>
+        <nav class="nav-list">
+          <button class="nav-link active" data-view="watchlist">
+            <span class="nav-icon" aria-hidden="true">▤</span><span>My watchlist</span>
+            <span class="nav-count" id="sidebar-count">0</span>
+          </button>
+          <button class="nav-link" data-view="watched">
+            <span class="nav-icon check-icon" aria-hidden="true">✓</span><span>Watched</span>
+          </button>
+          <button class="nav-link" data-view="discover">
+            <span class="nav-icon" aria-hidden="true">✳</span><span>Discover</span>
+          </button>
+        </nav>
+
+        <div class="sidebar-note">
+          <div class="note-icon" aria-hidden="true">✳</div>
+          <p>Good films deserve<br />a spot on the list.</p>
+          <span>YOUR NEXT MOVIE NIGHT, SORTED.</span>
+        </div>
+        <div class="sidebar-footer"><span class="status-dot"></span> YOUR PERSONAL FILM CLUB</div>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar">
+          <div class="breadcrumb"><span>YOUR SPACE</span><span class="crumb-slash">/</span><strong id="page-crumb">MY WATCHLIST</strong></div>
+          <div class="topbar-right">
+            <label class="search-box">
+              <span class="search-icon" aria-hidden="true"></span>
+              <input id="search" type="search" placeholder="Find a film..." autocomplete="off" aria-label="Find a film" />
+              <kbd>/</kbd>
+            </label>
+            <button class="install-button" id="install-button" type="button"><span aria-hidden="true">↓</span><span>Install app</span></button>
+            <button class="avatar" aria-label="Your profile">J</button>
+          </div>
+        </header>
+
+        <div class="page-wrap">
+          <section class="welcome-row">
+            <div>
+              <p class="eyebrow"><span class="eyebrow-line"></span> A LITTLE SOMETHING TO WATCH</p>
+              <h1 id="page-title">Your watchlist<span class="title-period">.</span></h1>
+              <p class="intro" id="page-intro">All the films you’ve been meaning to see, in one very good place.</p>
+            </div>
+            <div class="date-pill"><span class="calendar-icon" aria-hidden="true">▦</span><span id="current-date"></span></div>
+          </section>
+
+          <section class="featured" id="featured">
+            <img id="featured-image" class="featured-image" alt="" />
+            <div class="featured-shade"></div>
+            <div class="featured-content">
+              <div class="featured-tag"><span>✳</span> TONIGHT’S PICK</div>
+              <p class="featured-kicker">A FILM TO GET LOST IN</p>
+              <h2 id="featured-title"></h2>
+              <p id="featured-meta" class="featured-meta"></p>
+              <p id="featured-description" class="featured-description"></p>
+              <button id="featured-button" class="featured-button"><span aria-hidden="true">＋</span> Add to watchlist</button>
+            </div>
+            <div class="featured-caption">HAND-PICKED FOR YOUR NEXT MOVIE NIGHT</div>
+            <div class="featured-index"><span>01</span> <i></i> 04</div>
+          </section>
+
+          <section class="collection-section">
+            <div class="section-heading">
+              <div>
+                <div class="section-title-line"><h2 id="collection-title">The watchlist</h2><span class="collection-count" id="collection-count">0 FILMS</span></div>
+                <p id="collection-subtitle">A few stories waiting for their moment.</p>
+              </div>
+              <label class="sort-control">SORT BY
+                <select id="sort-select" aria-label="Sort movies">
+                  <option value="added">Recently added</option>
+                  <option value="title">Title A–Z</option>
+                  <option value="year">Release year</option>
+                  <option value="rating">Top rated</option>
+                </select>
+              </label>
+            </div>
+            <div class="filter-row" id="filter-row" aria-label="Filter movies">
+              <button class="filter-chip selected" data-filter="all">Everything <span id="all-count">0</span></button>
+              <button class="filter-chip" data-filter="drama">Drama</button>
+              <button class="filter-chip" data-filter="sci-fi">Sci-fi</button>
+              <button class="filter-chip" data-filter="thriller">Thriller</button>
+              <button class="filter-chip" data-filter="comedy">Comedy</button>
+              <button class="filter-chip" data-filter="adventure">Adventure</button>
+            </div>
+            <div class="movie-grid" id="movie-grid"></div>
+            <div class="empty-state" id="empty-state" hidden>
+              <div class="empty-icon">✳</div>
+              <h3 id="empty-title">Your list is a blank canvas.</h3>
+              <p id="empty-copy">Every great movie night starts with one good film.</p>
+              <button id="empty-action" class="primary-button">Find something to watch <span aria-hidden="true">↗</span></button>
+            </div>
+          </section>
+          <footer class="page-footer"><span>MADE FOR MOVIE PEOPLE</span><span>TAKE YOUR TIME. PICK A GOOD ONE. <span class="footer-star">✳</span></span></footer>
+        </div>
+      </main>
+    </div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <dialog class="install-dialog" id="install-dialog" aria-labelledby="install-dialog-title">
+      <form method="dialog"><button class="dialog-close" aria-label="Close">×</button></form>
+      <span class="dialog-icon" aria-hidden="true">r</span>
+      <h2 id="install-dialog-title">Take Reelgood with you.</h2>
+      <p id="install-instructions"></p>
+      <button class="primary-button dialog-done" id="dialog-done" type="button">Got it</button>
+    </dialog>
+    <script src="app.js"></script>
+  </body>
+</html>
